@@ -68,4 +68,11 @@ public class playeranimation : MonoBehaviour
             Debug.Log("dung im");
         }
     }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("DeadZone"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
