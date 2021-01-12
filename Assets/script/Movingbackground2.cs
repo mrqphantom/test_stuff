@@ -6,7 +6,6 @@ public class Movingbackground2 : MonoBehaviour
 {
     public float speed;
     public float changedir = -1;
-    public float timedelay;
     Rigidbody2D rigid;
     Vector3 move;
     // Start is called before the first frame update
