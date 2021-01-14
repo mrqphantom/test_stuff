@@ -6,13 +6,13 @@ public class Movingbackground2 : MonoBehaviour
 {
     public float speed;
     public float changedir = -1;
-    Rigidbody2D rigid;
+   
     Vector3 move;
     // Start is called before the first frame update
     void Start()
     {
         move = this.transform.position;
-        rigid = this.gameObject.GetComponent<Rigidbody2D>();
+       
     }
 
     // Update is called once per frame
@@ -26,7 +26,7 @@ public class Movingbackground2 : MonoBehaviour
     {
         if(col.collider.CompareTag("ground"))
         {
-            
+            Debug.Log("va cham");
             speed = speed * changedir;
         }
         

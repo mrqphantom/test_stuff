@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {   public float speed = 50f;
-    public float timedash;
-    public int direction;
-    public int dashspeed;
-    public int startDashtime;
+ 
+    
 
     public float maxspeed;
     public bool grounded;
@@ -21,7 +19,7 @@ public class player : MonoBehaviour
     {
         rigid = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
-        timedash = startDashtime;
+       
        
     }
 
@@ -77,42 +75,8 @@ public class player : MonoBehaviour
             Scale.x *= -1;
             transform.localScale = Scale;
         }
-         if (direction == 0)
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            if(h < 0)
-            {
-                direction = 1;
-            }
-            else if( h >0)
-            {
-                direction = 2;
-            }
-            
-        }
-        else
-        {
-            if(timedash <= 0)
-            {   direction =0;
-                timedash =startDashtime;
-                rigid.velocity = Vector2.zero;
-            }
-            else{
-                timedash -= Time.deltaTime;
-                if( direction == 1 )
-                {
-                rigid.velocity = Vector2.left * dashspeed;
-
-                 }
-                else if (direction == 2)
-                {
-                rigid.velocity = Vector2.right * dashspeed;
-                 }
-            }
-        }
-        
-    }
+   
+    
     }
    
 
