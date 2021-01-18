@@ -12,6 +12,9 @@ public class player : MonoBehaviour
     public float speedDash;
     float direction = 1;
     float gravity;
+    
+
+    public ParticleSystem effectDash;
 
     public float maxspeed;
     public bool grounded;
@@ -43,6 +46,7 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
+            Instantiate(effectDash,this.gameObject.transform.position,Quaternion.identity);
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
         }

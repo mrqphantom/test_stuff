@@ -272,7 +272,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &14836799
 MonoBehaviour:
@@ -289,6 +289,8 @@ MonoBehaviour:
   speed: 40
   health: 100
   speedDash: 0.5
+  effectDash: {fileID: 1165059347757536226, guid: 7802b5de6c0f1ca41bc91c1cb5aafc6b,
+    type: 3}
   maxspeed: 4
   grounded: 1
   faceright: 0
@@ -1392,7 +1394,7 @@ PrefabInstance:
     - target: {fileID: 6105754583327441060, guid: 1acda421e2f8313468de4cf1f8cc399a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6105754583327441060, guid: 1acda421e2f8313468de4cf1f8cc399a,
         type: 3}
@@ -1735,7 +1737,7 @@ Transform:
   m_LocalScale: {x: 0.74343, y: 0.74343, z: 0.74343}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304579114
 GameObject:
@@ -2521,7 +2523,7 @@ PrefabInstance:
     - target: {fileID: 6105754583327441060, guid: 1acda421e2f8313468de4cf1f8cc399a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6105754583327441060, guid: 1acda421e2f8313468de4cf1f8cc399a,
         type: 3}
