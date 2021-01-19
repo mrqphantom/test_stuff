@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {   public float speed = 50f;
+    public float timedelaydeath;
     public int health =100;
     IEnumerator dashcoutine;
     bool isdashing = false;
@@ -12,17 +14,15 @@ public class player : MonoBehaviour
     public float speedDash;
     float direction = 1;
     float gravity;
-    
-
     public ParticleSystem effectDash;
-
     public float maxspeed;
-    public bool grounded;
-    public bool faceright;
-    public bool doublejump;
+    public bool grounded = false;
+    public bool faceright = true;
+    public bool doublejump = false;
     public float height_hight;
     public Rigidbody2D rigid;
     public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +46,7 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
-            Instantiate(effectDash,this.gameObject.transform.position,Quaternion.identity);
+            Instantiate(effectDash,transform.position,Quaternion.identity);
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
         }
@@ -55,7 +55,7 @@ public class player : MonoBehaviour
             if (grounded)
             {
                 grounded = false;
-                doublejump = true;
+                doublejump = true;                
                 rigid.AddForce((Vector2.up)*height_hight);
 
             }
@@ -64,9 +64,8 @@ public class player : MonoBehaviour
                 if (doublejump)
                 {
                     doublejump = false;
-                    grounded = true;
-                    rigid.velocity = new Vector2(0, rigid.velocity.y);
-                    rigid.AddForce((Vector2.up) * height_hight);
+                    rigid.velocity = new Vector2(rigid.velocity.x,0);
+                    rigid.AddForce((Vector2.up) * height_hight * 0.5f);
                 }
             }
         }
@@ -111,7 +110,7 @@ public class player : MonoBehaviour
         
         if (health <=0)
         {
-            Death();
+            StartCoroutine(delaydeath());
         }
        
    
@@ -122,26 +121,46 @@ public class player : MonoBehaviour
         isdashing = true;
         candash = false;
         
-        rigid.velocity = Vector2.zero;
+        
         yield return new WaitForSeconds(dashDuartion);
         isdashing = false;
-        rigid.gravityScale = gravity;
-        rigid.velocity = Vector2.zero;
+       
         yield return new WaitForSeconds(dashCooldown);
         candash = true;
 
     }
-    public void Death()
+   public void Death()
     {
+        rigid.velocity = new Vector2(0, 0);
+        rigid.AddForce((Vector2.up *-60));
+        health = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
     public void OnTriggerExit2D(Collider2D col)
     {
         if (col.CompareTag("Hell"))
-        {   health -= 1;
-            Death();
+        {   
+            StartCoroutine(delaydeath());
         }
     }
 
+    public void takedamage(int damage)
+    {
+        health -= damage;
+        gameObject.GetComponent<Animation>().Play("hurt");
+    }
+    IEnumerator delaydeath()
+    {
+        health = 0;
+        yield return new WaitForSeconds(timedelaydeath);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
+
+    }
+    public void pullback(float pullpower, Vector2 pulldir)
+    {
+        rigid.velocity = new Vector2(0, 0);
+        rigid.AddForce(new Vector2(pulldir.x * -200, pulldir.y * pullpower));
+    }
 }

@@ -26,7 +26,7 @@ public class Movingbackground2 : MonoBehaviour
     {
         if(col.collider.CompareTag("ground"))
         {
-            Debug.Log("va cham");
+            
             speed = speed * changedir;
         }
         
