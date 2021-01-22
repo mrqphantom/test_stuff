@@ -8,6 +8,7 @@ TagManager:
   - ground
   - flyingbackground
   - Hell
+  - Enemy
   layers:
   - Default
   - TransparentFX
