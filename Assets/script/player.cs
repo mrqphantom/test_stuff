@@ -12,13 +12,10 @@ public class player : MonoBehaviour
     bool isdashing = false;
     bool candash = true;
     public float speedDash;
+    public float maxspeedY;
     float direction = 1;
     float gravity;
-<<<<<<< HEAD
     public ParticleSystem effectDash;
-=======
-
->>>>>>> parent of cec9fca... update  dash
     public float maxspeed;
     public bool grounded = false;
     public bool faceright = true;
@@ -50,10 +47,10 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
-<<<<<<< HEAD
+
             Instantiate(effectDash,transform.position,Quaternion.identity);
-=======
->>>>>>> parent of cec9fca... update  dash
+
+
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
         }
@@ -94,6 +91,8 @@ public class player : MonoBehaviour
             rigid.velocity = new Vector2(maxspeed, rigid.velocity.y);
         if ((rigid.velocity.x < -maxspeed) && (isdashing == false))
             rigid.velocity = new Vector2(-maxspeed, rigid.velocity.y);
+        if ((rigid.velocity.y > maxspeedY))
+            rigid.velocity = new Vector2(rigid.velocity.x, maxspeedY);
         if(h > 0 && !faceright)
         {
             Flip();
@@ -138,8 +137,7 @@ public class player : MonoBehaviour
     }
    public void Death()
     {
-        rigid.velocity = new Vector2(0, 0);
-        rigid.AddForce((Vector2.up *-60));
+      
         health = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 

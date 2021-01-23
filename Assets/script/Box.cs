@@ -17,7 +17,7 @@ public class Box : MonoBehaviour
             Destroy(gameObject);
         }
     
-        void takedamage(int damage)
+        void givedamage(int damage)
         {
             health -= damage;
         }
