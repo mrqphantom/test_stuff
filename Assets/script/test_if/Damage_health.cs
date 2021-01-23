@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class Damage_health : MonoBehaviour
 {
-    public int my_health;
+    public float my_health = 90f;
     // Start is called before the first frame update
     void Start()
     {
-        Takedamage(10);
+        Takedamage(19.6f);
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        Takedamage(10);
+    {
         if(my_health <= 0)
         {
             my_health = 0;
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 2f);
             Debug.Log("thua roi");
         }
         else if(my_health >= 100)
@@ -26,12 +25,10 @@ public class Damage_health : MonoBehaviour
             Debug.Log("nhap sai");
             
         }
-        
     }
-    
-  void Takedamage(int damage)
+  void Takedamage(float damage)
     {
         
-       my_health -= damage;
-}
+        my_health -= Mathf.RoundToInt(damage);
+    }
 }

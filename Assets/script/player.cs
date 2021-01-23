@@ -14,7 +14,11 @@ public class player : MonoBehaviour
     public float speedDash;
     float direction = 1;
     float gravity;
+<<<<<<< HEAD
     public ParticleSystem effectDash;
+=======
+
+>>>>>>> parent of cec9fca... update  dash
     public float maxspeed;
     public bool grounded = false;
     public bool faceright = true;
@@ -46,7 +50,10 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
+<<<<<<< HEAD
             Instantiate(effectDash,transform.position,Quaternion.identity);
+=======
+>>>>>>> parent of cec9fca... update  dash
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
         }
