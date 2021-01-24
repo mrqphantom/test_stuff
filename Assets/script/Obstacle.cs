@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Player"))
-            Debug.Log("va cham");
+           
             player.takedamage(1);
             player.pullback(500f,player.transform.position);
         }
