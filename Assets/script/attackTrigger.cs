@@ -10,7 +10,7 @@ public class attackTrigger : MonoBehaviour
         if (col.isTrigger != false && col.CompareTag("Enemy"))
         {
             Debug.Log("Cham roi");
-            col.SendMessageUpwards("damage", damage);
+            col.SendMessageUpwards("turretTakeDamage", damage);
         }
     }
 }

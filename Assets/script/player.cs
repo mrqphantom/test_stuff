@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class player : MonoBehaviour
 {   public float speed = 50f;
     public float timedelaydeath;
-    public int health =100;
+    public int health =5;
     IEnumerator dashcoutine;
     bool isdashing = false;
     bool candash = true;
@@ -23,16 +23,21 @@ public class player : MonoBehaviour
     public float height_hight;
     public Rigidbody2D rigid;
     public Animator anim;
+    public HealthBar healthBar;
+    public int currentPlayerHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         rigid = gameObject.GetComponent<Rigidbody2D>();
         anim = gameObject.GetComponent<Animator>();
         dashcoutine = Dash(0.5f, 0f);
         StartCoroutine(dashcoutine);
         gravity = rigid.gravityScale;
-       
+        currentPlayerHealth = health;
+        healthBar.setMaxHealth(health);
+
     }
 
     // Update is called once per frame
@@ -154,6 +159,7 @@ public class player : MonoBehaviour
     {
         health -= damage;
         gameObject.GetComponent<Animation>().Play("hurt");
+        healthBar.SetHealth(health);
     }
     IEnumerator delaydeath()
     {

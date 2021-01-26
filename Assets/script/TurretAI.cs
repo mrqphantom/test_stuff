@@ -53,7 +53,7 @@ public class TurretAI : MonoBehaviour
         distance = Vector2.Distance(transform.position, target.transform.position);
         if (distance < awakeRange)
         {
-            Debug.Log("Gap nhau");
+          
             awake = true;
         }
         if (distance > awakeRange)
@@ -84,6 +84,11 @@ public class TurretAI : MonoBehaviour
             }
 
         }
+    }
+    public void turretTakeDamage(int turretTakeDamage)
+    {
+        turretHealth -= turretTakeDamage;
+        gameObject.GetComponent<Animation>().Play("Hurt");
     }
    
 }
