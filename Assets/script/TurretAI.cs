@@ -61,5 +61,29 @@ public class TurretAI : MonoBehaviour
             awake = false;
         }
     }
+    public void Attack(bool attackRight)
+    {
+        bulletTimer += Time.deltaTime;
+        if (bulletTimer >= shootingTime)
+        {
+            Vector2 direction = target.transform.position - transform.position;
+            direction.Normalize();
+            if(attackRight)
+            {
+                GameObject bulletclone;
+                bulletclone = Instantiate(bullet, shootingPointR.transform.position, shootingPointR.transform.rotation) as GameObject;
+                bulletclone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+                bulletTimer = 0;
+            }
+            if (!attackRight)
+            {
+                GameObject bulletclone;
+                bulletclone = Instantiate(bullet, shootingPointL.transform.position, shootingPointL.transform.rotation) as GameObject;
+                bulletclone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
+                bulletTimer = 0;
+            }
+
+        }
+    }
    
 }

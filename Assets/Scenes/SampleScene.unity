@@ -1124,7 +1124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 380941297}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: enemy_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2317,15 +2317,15 @@ MonoBehaviour:
   distance: 8
   awakeRange: 9
   shootingTime: 0
-  bulletSpeed: 0
-  bulletTimer: 0
+  bulletSpeed: 3
+  bulletTimer: 3
   awake: 0
   lookRight: 1
-  bullet: {fileID: 0}
+  bullet: {fileID: 3766675457426997439, guid: 8a4c06e06738bde42ba935d933074b4d, type: 3}
   target: {fileID: 14836798}
   anim: {fileID: 0}
-  shootingPointL: {fileID: 0}
-  shootingPointR: {fileID: 0}
+  shootingPointL: {fileID: 226551774}
+  shootingPointR: {fileID: 1525322989}
 --- !u!1 &1391950405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,6 +2336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391950406}
   - component: {fileID: 1391950407}
+  - component: {fileID: 1391950408}
   m_Layer: 0
   m_Name: AttackTriggerRight
   m_TagString: Untagged
@@ -2383,6 +2384,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.64, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1391950408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391950405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ade29055abcdc44bf615da11e03491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  isLeft: 0
 --- !u!1 &1462142049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2955,6 +2970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1929195949}
   - component: {fileID: 1929195950}
+  - component: {fileID: 1929195951}
   m_Layer: 0
   m_Name: AttackTriggerLeft
   m_TagString: Untagged
@@ -3002,6 +3018,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.64, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1929195951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929195948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00ade29055abcdc44bf615da11e03491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  isLeft: 1
 --- !u!1 &1939012251
 GameObject:
   m_ObjectHideFlags: 0
