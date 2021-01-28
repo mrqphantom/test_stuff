@@ -10,6 +10,8 @@ TagManager:
   - ground
   - trigger
   - Enemy
+  - coin
+  - gameUI
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,7 @@ public class player : MonoBehaviour
     float direction = 1;
     float gravity;
     public ParticleSystem effectDash;
-    public ParticleSystem effectDashfollow;
+   
     public float maxspeed;
     public bool grounded = false;
     public bool faceright = true;
@@ -26,6 +26,7 @@ public class player : MonoBehaviour
     public Animator anim;
     public HealthBar healthBar;
     public int currentPlayerHealth;
+    public GameUI gameUI;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,8 @@ public class player : MonoBehaviour
         gravity = rigid.gravityScale;
         currentPlayerHealth = health;
         healthBar.setMaxHealth(health);
-        gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        
+        gameUI = GameObject.FindGameObjectWithTag("gameUI").GetComponent<GameUI>();
 
     }
 
@@ -54,7 +56,7 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.GetComponent<Animation>().Play("dash");
             Instantiate(effectDash,transform.position,Quaternion.identity);
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
@@ -173,5 +175,12 @@ public class player : MonoBehaviour
     {
         rigid.velocity = new Vector2(0, 0);
         rigid.AddForce(new Vector2(pulldir.x * -200, pulldir.y * pullpower));
+    }
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.CompareTag("coin"))
+        { Destroy(col.gameObject);
+            gameUI.coins += 1;
+        }
     }
 }
