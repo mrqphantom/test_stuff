@@ -16,6 +16,7 @@ public class player : MonoBehaviour
     float direction = 1;
     float gravity;
     public ParticleSystem effectDash;
+    public ParticleSystem effectDashfollow;
     public float maxspeed;
     public bool grounded = false;
     public bool faceright = true;
@@ -37,6 +38,7 @@ public class player : MonoBehaviour
         gravity = rigid.gravityScale;
         currentPlayerHealth = health;
         healthBar.setMaxHealth(health);
+        gameObject.transform.GetChild(1).gameObject.SetActive(false);
 
     }
 
@@ -52,10 +54,8 @@ public class player : MonoBehaviour
             {
                 StopCoroutine(dashcoutine);
             }
-
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
             Instantiate(effectDash,transform.position,Quaternion.identity);
-
-
             dashcoutine = Dash(0.2f, 0.5f);
             StartCoroutine(dashcoutine);
         }

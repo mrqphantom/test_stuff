@@ -32,5 +32,15 @@ public class checkgrounded : MonoBehaviour
             player.grounded = false;
 
     }
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("ground"))
+            this.transform.parent = col.transform;
+    }
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("ground"))
+                this.transform.parent = null;
 
+    }
 }
