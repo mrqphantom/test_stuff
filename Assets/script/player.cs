@@ -144,9 +144,10 @@ public class player : MonoBehaviour
     }
    public void Death()
     {
-      
-        health = 0;
+        if (PlayerPrefs.GetInt("highScore") < gameUI.points)
+            PlayerPrefs.SetInt("highScore", gameUI.points);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+      
 
     }
     public void OnTriggerExit2D(Collider2D col)
@@ -165,7 +166,7 @@ public class player : MonoBehaviour
     }
     IEnumerator delaydeath()
     {
-        health = 0;
+       
         yield return new WaitForSeconds(timedelaydeath);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
@@ -180,7 +181,7 @@ public class player : MonoBehaviour
     {
         if(col.CompareTag("coin"))
         { Destroy(col.gameObject);
-            gameUI.coins += 1;
+            gameUI.points += 1;
         }
     }
 }
