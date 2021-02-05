@@ -123,7 +123,8 @@ public class player : MonoBehaviour
         
         if (health <=0)
         {
-            StartCoroutine(delaydeath());
+            Death();
+            
         }
        
    
@@ -147,8 +148,6 @@ public class player : MonoBehaviour
         if (PlayerPrefs.GetInt("highScore") < gameUI.points)
             PlayerPrefs.SetInt("highScore", gameUI.points);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-      
-
     }
     public void OnTriggerExit2D(Collider2D col)
     {

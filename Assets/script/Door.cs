@@ -19,7 +19,7 @@ public class Door : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             savescore();
-            gameUI.inputText.text = ("press E to enter");
+            gameUI.inputText.text = ("press R to enter");
         }
     }
     public void OnTriggerStay2D(Collider2D col)
@@ -28,6 +28,8 @@ public class Door : MonoBehaviour
         { if (Input.GetKey(KeyCode.R))
             {
                 savescore();
+                Debug.Log("da save" + PlayerPrefs.GetInt("points"));
+                
                 SceneManager.LoadScene(levelLoad);
             }
         }    
@@ -40,6 +42,6 @@ public class Door : MonoBehaviour
 
         void savescore()
     {
-        PlayerPrefs.SetInt("coins", gameUI.points);
+        PlayerPrefs.SetInt("points", gameUI.points);
     }
 }
