@@ -23,12 +23,12 @@ public class checkgrounded : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D col)
     {
-        if (col.CompareTag("ground"))
+        if ((col.CompareTag("ground")) || col.CompareTag("water"))
             player.grounded = true;
     }
     public void OnTriggerExit2D(Collider2D col)
     {
-        if (col.CompareTag("ground"))
+        if ((col.CompareTag("ground")) || col.CompareTag("water"))
             player.grounded = false;
 
     }
