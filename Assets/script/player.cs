@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {   public float speed = 50f;
-    public float timedelaydeath;
+    public float timedelaydeath =2f;
     public int health =5;
     IEnumerator dashcoutine;
     bool isdashing = false;
@@ -28,6 +28,14 @@ public class player : MonoBehaviour
     public int currentPlayerHealth;
     public GameUI gameUI;
 
+    public Soundmanager audiosrc;
+    public cameraShake cameraShake;
+    public float timeShake;
+    public float magnitudeShake;
+    public float slowTime = 0.2f;
+    private bool isSlowed = false;
+   
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +47,7 @@ public class player : MonoBehaviour
         gravity = rigid.gravityScale;
         currentPlayerHealth = health;
         healthBar.setMaxHealth(health);
-        
+        audiosrc = GameObject.FindGameObjectWithTag("sound").GetComponent<Soundmanager>();
         gameUI = GameObject.FindGameObjectWithTag("gameUI").GetComponent<GameUI>();
 
     }
@@ -51,7 +59,7 @@ public class player : MonoBehaviour
         anim.SetFloat("Speed", Mathf.Abs(rigid.velocity.x));
         
         if ((Input.GetKeyDown(KeyCode.LeftShift) && candash == true))
-        {
+        { 
             if (dashcoutine != null)
             {
                 StopCoroutine(dashcoutine);
@@ -65,6 +73,7 @@ public class player : MonoBehaviour
         {
             if (grounded)
             {
+               
                 grounded = false;
                 doublejump = true;                
                 rigid.AddForce((Vector2.up)*height_hight);
@@ -84,7 +93,7 @@ public class player : MonoBehaviour
     void FixedUpdate()
     {
         float h = Input.GetAxis("Horizontal");
-        rigid.AddForce((Vector2.right) * speed * h);
+        rigid.AddForce((Vector2.right) * speed * h );
         if ( h != 0)
         {
             direction = h;
@@ -134,8 +143,8 @@ public class player : MonoBehaviour
     {
         isdashing = true;
         candash = false;
-        
-        
+     
+
         yield return new WaitForSeconds(dashDuartion);
         isdashing = false;
        
@@ -147,16 +156,12 @@ public class player : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("highScore") < gameUI.points)
             PlayerPrefs.SetInt("highScore", gameUI.points);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+        audiosrc.Playsound("endgame");
+        StartCoroutine(delaydeath());
+       
     }
-    public void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag("Hell"))
-        {   
-            StartCoroutine(delaydeath());
-        }
-    }
-
+  
     public void takedamage(int damage)
     {
         health -= damage;
@@ -165,9 +170,11 @@ public class player : MonoBehaviour
     }
     IEnumerator delaydeath()
     {
-       
+        
+        audiosrc.Playsound("endgame");
         yield return new WaitForSeconds(timedelaydeath);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+     
 
 
     }
@@ -179,8 +186,38 @@ public class player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if(col.CompareTag("coin"))
-        { Destroy(col.gameObject);
+        {
+            audiosrc.Playsound("coins");
+            Destroy(col.gameObject);
             gameUI.points += 1;
         }
+        if (col.CompareTag("Hell"))
+        {
+            StartCoroutine(cameraShake.Shake(timeShake, magnitudeShake));
+            StartCoroutine(delaydeath());
+        }
+
+        if (col.CompareTag("itemLife"))
+        {
+            
+            health = 5;
+            Destroy(col.gameObject);
+        }
+        if(col.CompareTag("itemShoe"))
+        {
+            
+            speed = speed + speed;
+            maxspeed = maxspeed + maxspeed;
+            Destroy(col.gameObject);
+            StartCoroutine(returnNormalSpeed(5f));
+        }
+
+    }
+    IEnumerator returnNormalSpeed(float time)
+    {
+        yield return new WaitForSeconds(time);
+        maxspeed = maxspeed / 2;
+        speed = speed / 2;
+        yield return 0;
     }
 }

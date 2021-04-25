@@ -14,6 +14,9 @@ TagManager:
   - gameUI
   - stopBar
   - water
+  - sound
+  - itemShoe
+  - itemLife
   layers:
   - Default
   - TransparentFX

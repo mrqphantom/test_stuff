@@ -8,9 +8,11 @@ public class playerAttack : MonoBehaviour
     public float timedelay = 0.3f;
     public Animator anim;
     public Collider2D trigger;
+    public Soundmanager audiosrc;
     // Start is called before the first frame update
     void Awake()
     {
+        audiosrc = GameObject.FindGameObjectWithTag("sound").GetComponent<Soundmanager>();
         anim = gameObject.GetComponent<Animator>();
         trigger.enabled = false;
     }
@@ -38,6 +40,7 @@ public class playerAttack : MonoBehaviour
                     trigger.enabled = false;
                 }
             }
+            audiosrc.Playsound("attack");
             anim.SetBool("Attacking", Attacking);
 
         }
